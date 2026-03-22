@@ -404,3 +404,22 @@ footer p {
   margin-bottom: 0.5rem;
   font-size: 0.95rem;
 }
+
+/* Responsive adjustments for Mobile */
+@media (max-width: 768px) {
+  header {
+    padding: 3rem 1rem 1.5rem;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  header p strong {
+    font-size: 1rem;
+  }
+  
+  #summary p {
+    font-size: 1.05rem;
+  }
+}
