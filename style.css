@@ -411,8 +411,14 @@ footer p {
     padding: 3rem 1rem 1.5rem;
   }
   
+  header img {
+    width: 220px;
+    height: 220px;
+    margin-bottom: 2rem;
+  }
+  
   h1 {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
   
   header p strong {
