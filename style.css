@@ -1,110 +1,406 @@
 /* =====================================================================
-   BASIC SWISS TYPOGRAPHY (Minimal CSS for Module 3 submission)
+   MODULE 5: MODERN CSS STYLING (Swiss Typography, Flexbox, & CSS Grid)
+   Enhanced with subtle premium aesthetics (Glassmorphism, gradients)
    ===================================================================== */
 
+/* Custom Properties (Variables) for consistent theming */
+:root {
+  --bg-color: #f8fafc;        /* Light clean background */
+  --text-main: #0f172a;       /* Dark slate for main text */
+  --text-muted: #475569;      /* Muted text for paragraphs */
+  --primary-color: #4f46e5;   /* Vibrant Indigo accent */
+  --primary-hover: #4338ca;   /* Darker Indigo for hover states */
+  --accent-color: #8b5cf6;    /* Secondary vibrant purple for gradients */
+  --card-bg: rgba(255, 255, 255, 0.95); /* Slightly transparent white */
+  --border-color: #e2e8f0;    /* Soft borders */
+  
+  --radius: 12px;
+  --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Base Reset & Typography */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-    background-color: #FAFAFA;
-    color: #111;
-    line-height: 1.5;
-    margin: 0 auto;
-    max-width: 800px;
-    padding: 2rem;
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--bg-color);
+  /* Added a very subtle mesh gradient background for depth */
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.08) 0px, transparent 40%),
+    radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.08) 0px, transparent 40%);
+  color: var(--text-main);
+  line-height: 1.6;
+  padding: 0 1rem;
+}
+
+/* Layout Constraint */
+header, main, footer {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Headers */
+h1, h2, h3 {
+  color: var(--text-main);
+  line-height: 1.2;
 }
 
 h1 {
-    font-size: 2.5rem;
-    text-transform: uppercase;
-    letter-spacing: -0.02em;
-    margin-bottom: 0.2rem;
+  font-size: 2.8rem;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  margin: 1.5rem 0 0.5rem;
+  text-align: center;
+  color: var(--text-main);
 }
 
 h2 {
-    font-size: 1.8rem;
-    text-transform: uppercase;
-    border-bottom: 2px solid #111;
-    padding-bottom: 0.5rem;
-    margin-top: 3rem;
-    margin-bottom: 1.5rem;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  position: relative;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+/* Solid underline instead of gradient */
+h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 50%;
+  height: 4px;
+  background-color: var(--primary-color);
+  border-radius: 2px;
 }
 
 h3 {
-    font-size: 1.25rem;
-    margin-bottom: 0.2rem;
-    font-weight: 600;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text-main);
 }
 
+p {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+/* Links */
 a {
-    color: #f72585; /* One accent color */
-    text-decoration: none;
-    font-weight: 500;
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
 }
 
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
+  color: var(--primary-hover);
 }
 
-img {
-    border-radius: 4px;
-    margin-bottom: 1rem;
-    display: block;
+/* Header Section (Flexbox) */
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 1rem 2rem;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 2rem;
+header img {
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 1rem;
+  object-fit: cover;
+  transition: var(--transition);
 }
 
-th, td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: left;
+header img:hover {
+  transform: scale(1.05); /* Subtle scale on photo */
 }
 
-th {
-    background-color: #eee;
-    text-transform: uppercase;
-    font-size: 0.9rem;
+header p strong {
+  color: var(--primary-color);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+/* Navigation - Glassmorphism */
+nav {
+  width: 100%;
+  margin-top: 2rem;
+  background: rgba(255, 255, 255, 0.75); /* Glass base */
+  backdrop-filter: blur(12px); /* Blur effect */
+  -webkit-backdrop-filter: blur(12px);
+  padding: 1rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 1rem;
+  z-index: 100;
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 nav ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    padding: 1rem 0;
-    margin-top: 1rem;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
-input, textarea, button {
-    font-family: inherit;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    width: 100%;
-    max-width: 400px;
+nav a {
+  color: var(--text-muted);
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
 }
 
-button {
-    background-color: #111;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-weight: bold;
+nav a:hover {
+  color: var(--primary-color);
+  background-color: rgba(79, 70, 229, 0.1); /* Soft indigo highlight */
+  text-decoration: none;
 }
 
-button:hover {
-    background-color: #f72585;
+/* Main Sections */
+main section {
+  margin: 5rem 0;
+  scroll-margin-top: 6rem;
+}
+
+/* Introduction styling */
+#summary p {
+  font-size: 1.1rem;
+  color: var(--text-main);
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  border-left: 4px solid var(--primary-color);
+}
+
+/* Card Design applied to custom elements */
+article {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Accent top border that reveals on hover */
+article::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+article:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent /* Handled by pseudo-element */
+}
+
+article:hover::before {
+  transform: scaleX(1);
+}
+
+article em {
+  font-style: normal;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+  background: rgba(79, 70, 229, 0.05); /* Subtle background for tags */
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid rgba(79, 70, 229, 0.1);
+}
+
+article ul {
+  padding-left: 1.25rem;
+  color: var(--text-muted);
+  margin-top: 1rem;
+}
+
+article li {
+  margin-bottom: 0.5rem;
+}
+
+/* CSS Grid Layouts for Sections */
+#projects, #experience, #education {
+  display: grid;
+  gap: 1.5rem;
+}
+
+#projects h2, #experience h2, #education h2 {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 768px) {
+  #projects, #experience, #education {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tables Modernization */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  margin-top: 1rem;
+}
+
+th, td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-muted);
+}
+
+td strong {
+  color: var(--text-main);
+}
+
+th {
+  background-color: rgba(241, 245, 249, 0.8);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  color: var(--text-main);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr {
+  transition: var(--transition);
+}
+
+tbody tr:hover {
+  background-color: rgba(248, 250, 252, 0.8);
+}
+
+/* Forms: Contact Section using Flexbox */
+#contact form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  padding: 2.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+}
+
+#contact form br {
+  display: none;
+}
+
+#contact label {
+  font-weight: 600;
+  color: var(--text-main);
+  margin-top: 1rem;
+}
+
+#contact label:first-child {
+  margin-top: 0;
+}
+
+#contact input, #contact textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: var(--transition);
+  background-color: rgba(248, 250, 252, 0.7);
+  color: var(--text-main);
+}
+
+#contact input:focus, #contact textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+  background-color: #ffffff;
+}
+
+button[type="submit"] {
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 1rem;
+  align-self: flex-start;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 14px 0 rgba(79, 70, 229, 0.39);
+}
+
+button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.5);
+}
+
+/* Footer elements */
+hr {
+  display: none;
 }
 
 footer {
-    margin-top: 4rem;
-    font-size: 0.9rem;
-    color: #555;
+  text-align: center;
+  padding: 3rem 1rem;
+  border-top: 1px solid var(--border-color);
+  margin-top: 5rem;
+  color: var(--text-muted);
+}
+
+footer p {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
 }
